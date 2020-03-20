@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN apt-get upadte
+RUN apk --update 
 
 ENV STATIC_URL /static
 
