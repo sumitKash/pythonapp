@@ -1,11 +1,14 @@
 FROM alpine:latest
 
-RUN apk --update 
+RUN apk add --no-cache python3-dev \
+    && pip3 install --upgrade pip
 
-ENV STATIC_URL /static
+WORKDIR /app
+COPY . /app
 
-ENV STATIC_PATH /var/www/app/static
+RUN pip3 --no-cache-dir install -r requirements.txt
 
-COPY ./requirements.txt /var/www/requirements.txt
+EXPOSE 5000
 
-RUN pip install -r /var/www/requirements.txt
+ENTRYPOINT ["python3"]
+CMD ["helloworld.py"]
